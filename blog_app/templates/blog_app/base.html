@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Blog{% endblock %}</title>
+</head>
+
+<body>
+    <nav>
+        <a href="{% url 'inicio' %}">Tu Blog</a>
+        <div>
+            <ul>
+                <li>
+                    <a href="{% url 'inicio' %}">Inicio</a>
+                </li>
+                <li>
+                    <a href="{% url 'agregar_autor' %}">Agregar Autor</a>
+                </li>
+                <li>
+                    <a href="{% url 'agregar_categoria' %}">Agregar Categoría</a>
+                </li>
+                <li>
+                    <a href="{% url 'agregar_articulo' %}">Agregar Artículo</a>
+                </li>
+            </ul>
+            <form role="search" action="{% url 'buscar_articulos' %}" method="get">
+                <input type="search" placeholder="Buscar Artículo" aria-label="Search" name="consulta">
+                <button type="submit">Buscar</button>
+            </form>
+        </div>
+    </nav>
+
+    <main>
+        {% if messages %}
+        {% for message in messages %}
+        <div>
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+
+        {% block content %}{% endblock %}
+    </main>
+</body>
+
+</html>

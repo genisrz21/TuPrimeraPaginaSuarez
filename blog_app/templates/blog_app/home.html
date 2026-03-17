@@ -1,0 +1,34 @@
+{% extends 'blog_app/base.html' %}
+
+{% block title %}Inicio - Blog{% endblock %}
+
+{% block content %}
+<div>
+    <h1>Bienvenido al Blog</h1>
+    <div>
+        <p>Aquí puedes encontrar los últimos artículos, agregar nuevos autores, categorías y crear tus propias
+            publicaciones.</p>
+    </div>
+</div>
+
+<h2>Últimos Artículos</h2>
+
+<div>
+    {% for articulo in articulos %}
+    <div>
+        <h5>{{ articulo.titulo }}</h5>
+        <h6>
+            <span>{{ articulo.categoria.nombre }}</span>
+        </h6>
+        <p>{{ articulo.contenido|truncatewords:20 }}</p>
+    </div>
+    <div>
+        <small>Por {{ articulo.autor.nombre }}</small>
+        <small>{{ articulo.fecha_publicacion|date:"d M Y" }}</small>
+    </div>
+
+    {% empty %}
+        <div>Aún no hay artículos publicados. ¡Sé el primero en agregar uno!</div>
+    {% endfor %}
+</div>
+{% endblock %}

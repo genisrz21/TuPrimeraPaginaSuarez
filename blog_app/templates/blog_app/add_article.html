@@ -1,0 +1,44 @@
+
+{% extends 'blog_app/base.html' %}
+
+{% block title %}Agregar Artículo - Blog{% endblock %}
+
+{% block content %}
+
+<h4>Agregar Nuevo Artículo</h4>
+
+<div>
+    <form method="post">
+        {% csrf_token %}
+        <div class="row">
+            <div>
+                <label for="{{ form.titulo.id_for_label }}"
+                >{{ form.titulo.label }}</label>
+                {{ form.titulo }}
+                {% if form.titulo.errors %}<div>{{ form.titulo.errors|striptags }}</div>{% endif %}
+            </div>
+            <div>
+                <label for="{{ form.autor.id_for_label }}"
+                >{{ form.autor.label }}</label>
+                {{ form.autor }}
+                {% if form.autor.errors %}<div>{{ form.autor.errors|striptags }}</div>{% endif %}
+            </div>
+            <div>
+                <label for="{{ form.categoria.id_for_label }}"
+                >{{ form.categoria.label }}</label>
+                {{ form.categoria }}
+                {% if form.categoria.errors %}<div>{{ form.categoria.errors|striptags }}</div>{% endif %}
+            </div>
+            <div>
+                <label for="{{ form.contenido.id_for_label }}"
+                >{{ form.contenido.label }}</label>
+                {{ form.contenido }}
+                {% if form.contenido.errors %}<div>{{ form.contenido.errors|striptags }}</div>{% endif %}
+            </div>
+        </div>
+        <button type="submit">Publicar Artículo</button>
+    </form>
+</div>
+
+{% endblock %}
+

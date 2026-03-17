@@ -1,0 +1,38 @@
+{% extends 'blog_app/base.html' %}
+
+{% block title %}Resultados de Búsqueda - Blog{% endblock %}
+
+{% block content %}
+<div>
+    <h2>Resultados de Búsqueda</h2>
+    {% if consulta %}
+    <p>Buscaste: <strong>"{{ consulta }}"</strong></p>
+    {% else %}
+    <p>Ingresa un término de búsqueda para encontrar artículos.</p>
+    {% endif %}
+</div>
+
+{% if consulta %}
+<div>
+    {% for articulo in articulos %}
+    <div>
+        <h5>{{ articulo.titulo }}</h5>
+        <h6>
+            <span>{{ articulo.categoria.nombre }}</span>
+        </h6>
+        <p>{{ articulo.contenido|truncatewords:20 }}</p>
+    </div>
+    <div>
+        <small>Por {{ articulo.autor.nombre }}</small>
+        <small>{{ articulo.fecha_publicacion|date:"d M Y" }}</small>
+    </div>
+    {% empty %}
+    <div>
+        <h5>No se encontraron resultados</h5>
+        <p>No encontramos ningún artículo que coincida con "<strong>{{ consulta }}</strong>".</p>
+        <a href="{% url 'inicio' %}">Volver al Inicio</a>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endblock %}
